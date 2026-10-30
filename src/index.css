@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+:root {
+  --transition-color: #0649e4;
+}
+
+@font-face {
+  font-family: "humane";
+  src: url("./fonts/Humane.ttf");
+}
+
+@font-face {
+  font-family: "newake";
+  src: url("./fonts/Newake-Font-Demo.otf");
+}
+
+@font-face {
+  font-family: "modernist";
+  src: url("./fonts/Sk-Modernist-Regular.otf");
+}
+
+@font-face {
+  font-family: "okata";
+  src: url("./fonts/okata.otf");
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+/* The sliding panel */
+.transition-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #E0FD60;
+  transform: scaleX(0);
+  transform-origin: left center;
+  pointer-events: none; /* switched to "auto" while animating */
+  will-change: transform;
+}
+
+.logo{
+  font-family: "humane";
+}
+
+.home-hero{
+  font-family: newake;
+}
+
+.home-subtitle{
+  font-family: "modernist";
+}
+
+.home-sideFont{
+  font-family: "okata";
+}
