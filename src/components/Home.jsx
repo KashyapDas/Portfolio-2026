@@ -6,13 +6,17 @@ import FashionGallery from '../miniComponent/FashionGallery'
 import { usePageTransition } from "./Pagetransition";
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
+import { usePreloader } from "./Preloader";
 
 const Home = () => {
+
   const { markPageReady } = usePageTransition();
   
+  const { completeLoading } = usePreloader();
   useGSAP(() => {
   const tl = gsap.timeline({
     onComplete: () => {
+      completeLoading("/");
       markPageReady();
     }
   });

@@ -5,11 +5,15 @@ import SwipeCards from "../miniComponent/SwipeCards";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { usePageTransition } from "./Pagetransition";
+import { usePreloader } from "./Preloader";
 
 function Works() {
   const { markPageReady } = usePageTransition();
+  const { completeLoading } = usePreloader();
+  
   
   useEffect(() => {
+    completeLoading("/works");
     markPageReady();
   }, [markPageReady]);
 

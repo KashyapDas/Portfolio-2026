@@ -5,11 +5,14 @@ import gsap from 'gsap';
 import ScrollPathText from "../miniComponent/ScrollPathText";
 import CardMarquee from "../miniComponent/CardMarquee";
 import { usePageTransition } from './Pagetransition';
+import { usePreloader } from './Preloader';
 
 function Skills() {
   const { markPageReady } = usePageTransition();
+  const { completeLoading } = usePreloader();
   
     useEffect(() => {
+      completeLoading("/skills")
       markPageReady();
     }, [markPageReady]);
 

@@ -1,12 +1,16 @@
 import { useEffect } from "react";
 import ActionButtons from "../miniComponent/ActionButtons";
 import { usePageTransition } from "./Pagetransition";
+import { usePreloader } from "./Preloader";
 
 function Contact() {
 
   const { markPageReady } = usePageTransition();
+    const { completeLoading } = usePreloader();
+  
   
     useEffect(() => {
+      completeLoading("/contact");
       markPageReady();
     }, [markPageReady]);
 

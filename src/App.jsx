@@ -8,11 +8,13 @@ import Contact from "./components/Contact";
 import { Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import Preloader from "./components/Preloader";
 
 
 function App() {
 
   return (
+    <Preloader>
     <PageTransitionProvider>
         <Navbar />
         <Routes>
@@ -24,6 +26,7 @@ function App() {
       </Routes>
       <Footer />
     </PageTransitionProvider>
+    </Preloader>
   );
 }
 

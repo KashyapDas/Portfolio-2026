@@ -3,11 +3,17 @@ import AboutIntroduction from "../miniComponent/AboutIntroduction";
 import Showcase from "../miniComponent/Showcase";
 import { usePageTransition } from "./Pagetransition";
 import { useEffect } from "react";
+import { usePreloader } from "./Preloader";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 function About() {
 
   const { markPageReady } = usePageTransition();
 
+  const { completeLoading } = usePreloader();
+
   useEffect(() => {
+    completeLoading("/about");
     markPageReady();
   }, [markPageReady]);
   
