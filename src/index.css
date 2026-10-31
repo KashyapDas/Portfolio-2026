@@ -24,6 +24,22 @@
   src: url("./fonts/okata.otf");
 }
 
+@font-face {
+  font-family: "morganoLight";
+  src: url("./fonts/Morganite-Light.ttf");
+}
+
+@font-face {
+  font-family: "morganoMedium";
+  src: url("./fonts/Morganite-Medium.ttf");
+}
+
+@font-face {
+  font-family: "morganoBold";
+  src: url("./fonts/Morganite-SemiBold.ttf");
+}
+
+
 body {
   margin: 0;
   font-family: system-ui, sans-serif;
@@ -74,4 +90,16 @@ html::-webkit-scrollbar {
 
 .modernist{
   font-family: "modernist";
+}
+
+.morganoLight{
+  font-family: "morganoLight";
+}
+
+.morganoMedium{
+  font: "morganoMedium";
+}
+
+.morganoBold{
+  font-family: "morganoBold";
 }
