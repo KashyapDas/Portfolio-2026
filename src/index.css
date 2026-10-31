@@ -39,6 +39,16 @@
   src: url("./fonts/Morganite-SemiBold.ttf");
 }
 
+@font-face {
+  font-family: "knife";
+  src: url("./fonts/Pierknife-Regular.otf");
+}
+
+@font-face {
+  font-family: "slito";
+  src: url("./fonts/Slito-Regular.otf");
+}
+
 
 body {
   margin: 0;
@@ -73,7 +83,7 @@ html::-webkit-scrollbar {
 }
 
 .home-hero{
-  font-family: newake;
+  font-family: "newake";
 }
 
 .home-subtitle{
@@ -102,4 +112,13 @@ html::-webkit-scrollbar {
 
 .morganoBold{
   font-family: "morganoBold";
+}
+
+.knife{
+  font-family: "knife";
+  font-weight: 100 !important;
+}
+
+.slito{
+  font-family: "slito";
 }

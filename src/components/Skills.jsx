@@ -3,6 +3,7 @@ import "../index.css"
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import ScrollPathText from "../miniComponent/ScrollPathText";
+import CardMarquee from "../miniComponent/CardMarquee";
 
 function Skills() {
 
@@ -51,10 +52,9 @@ function Skills() {
   const enableStackAnimation = contextSafe((e)=>{
     const card = e.currentTarget
     gsap.to(card,{
-      backgroundColor : "#E0FD60",
-      color : "black",
+      backgroundColor : "#6308CC",
       scale : 1.05,
-      duration : 0.8,
+      duration : 0.5,
       ease : "cubic-bezier(0.87, 0, 0.13, 1)"
     })
   })
@@ -63,9 +63,8 @@ function Skills() {
     const card = e.currentTarget
     gsap.to(card,{
       backgroundColor : "#8E51FF",
-      color : "white",
       scale : 1,
-      duration : 0.8,
+      duration : 0.5,
       ease : "cubic-bezier(0.87, 0, 0.13, 1)"
     })
   })
@@ -91,7 +90,7 @@ function Skills() {
         </div>
 
         {/* The 2nd effect */}
-        <div className='w-full h-fit'>
+        <div className='w-full h-fit pt-15 lg:pt-30'>
             <ScrollPathText
               items={[
                 "One Unified Product,",
@@ -103,8 +102,12 @@ function Skills() {
             />
         </div>
 
-        <div className='bg-blue-400 w-full h-screen'>
-          
+        <div className='w-full h-fit flex items-center justify-center pt-20 lg:pt-30'>
+              <h1 className='w-[80%] knife text-6xl lg:text-9xl text-center text-violet-300 cursor-pointer'>I can work across the main layers of a web product: shape the user experience, build the application logic, connect persistent data and explore intelligent features where they make sense.</h1>
+        </div>
+
+        <div className="w-full py-10">
+            <CardMarquee />
         </div>
 
     </div>
