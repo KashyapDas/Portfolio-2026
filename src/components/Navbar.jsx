@@ -39,18 +39,18 @@ function Navbar() {
   });
 
   return (
-    <nav className="w-full lg:px-7 lg:pt-2 h-fit flex items-center justify-between p-4 relative z-40 text-white bg-[#09090B]">
-      <button className="logo text-4xl uppercase">
+    <nav className="w-full lg:px-7 lg:pt-2 h-fit flex items-center justify-between p-4 relative z-40 text-white bg-[#09090B] select-none">
+      <h1 className="logo text-4xl lg:text-7xl uppercase">
         Kashyap Jyoti Das
-      </button>
+      </h1>
 
       <button
         type="button"
         onClick={enableNavbar}
         aria-label="Open menu"
-        className="text-4xl cursor-pointer hover:scale-105 transition-transform duration-150 bg-transparent border-none p-2"
+        className="flex items-center justify-center cursor-pointer hover:scale-105 transition-transform duration-150 bg-transparent border-none -mt-1 lg:mt-2"
       >
-        <i className="ri-menu-line text-white text-2xl"></i>
+        <i className="ri-menu-line text-white text-3xl select-none"></i>
       </button>
 
       {/* Slide-out Menu: Off-screen, invisible, and scroll-locked by default */}

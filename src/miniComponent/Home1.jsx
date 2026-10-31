@@ -105,7 +105,7 @@ function SocialItem({ staticText, hoverText, href }) {
       className="group relative block w-full overflow-hidden select-none touch-manipulation"
     >
       {/* Expanding Accent Background */}
-      <div className="hover-bg pointer-events-none absolute inset-0 origin-center scale-y-0 bg-[#e0fd60]" />
+      <div className="hover-bg pointer-events-none absolute inset-0 origin-center scale-y-0 bg-violet-400" />
 
       {/* Marquee Overlay */}
       <div className="hover-marquee pointer-events-none absolute inset-0 z-10 flex items-center overflow-hidden opacity-0">

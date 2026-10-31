@@ -221,7 +221,7 @@ const KineticFooter = ({
       {/* GSAP Animated Section */}
       <section
         ref={sectionRef}
-        className="relative flex h-[70vh] w-full items-center justify-center overflow-hidden bg-[#09090b] text-white"
+        className="relative flex h-[70vh] w-full items-center justify-center overflow-hidden bg-[#09090b] text-violet-400"
       >
         <div
           ref={textRef}

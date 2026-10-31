@@ -70,7 +70,7 @@ function Skills() {
   })
 
   return (
-    <div className='w-full h-fit bg-[#09090B] pl-7 pr-7'>
+    <div className='w-full h-fit bg-[#09090B] pl-7 pr-7 select-none'>
 
         {/* The skill cards */}
         <h1 className='morganoBold text-white text-8xl lg:text-[15vw]'>The<span className='text-violet-500 text-6xl lg:text-[8vw]'> Tools Behind The Build.</span></h1>

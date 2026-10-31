@@ -6,7 +6,7 @@ import FashionGallery from '../miniComponent/FashionGallery'
 
 const Home = () => {
   return (
-    <div className='w-full bg-black'>
+    <div className='w-full bg-black select-none'>
       <div className="relative z-20 h-[60vh] lg:h-[90vh] w-full">
         <FashionGallery />
       </div>

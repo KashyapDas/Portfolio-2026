@@ -15,7 +15,7 @@ function Footer() {
 );
 
   return (
-    <footer className="bg-[#09090b] z-10 h-fit">
+    <footer className="bg-[#09090b] z-10 h-fit select-none">
       <KineticFooter
         title="THE WORLD DOESN'T NEED ANOTHER WEBSITE. IT NEED A REASON TO REMEMBER."
         images={images}
