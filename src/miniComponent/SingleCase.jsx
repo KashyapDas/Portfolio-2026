@@ -3,22 +3,24 @@ import React from "react";
 const btn =
   "bg-white text-black font-[Satoshi] font-bold py-1 px-4 text-sm lg:text-base rounded-full lg:cursor-pointer";
 
-const SingleCase = ({ data, mover, index }) => {
+const SingleCase = ({ data, mover, index, isActive }) => {
   return (
     <div
       onMouseEnter={() => mover(index)}
       onTouchStart={() => mover(index)}
       onMouseLeave={() => mover(-7)}
-      className="w-full h-fit lg:h-[35vh] bg-[#0A0A0C] hover:bg-violet-600 transition-colors duration-300 flex flex-col lg:flex-row p-2 overflow-hidden cursor-pointer"
+      className={`w-full h-fit lg:h-[35vh] ${
+        isActive ? "bg-violet-600" : "bg-[#0A0A0C]"
+      } transition-colors duration-300 flex flex-col lg:flex-row p-2 overflow-hidden cursor-pointer`}
     >
       <div className="px-2 lg:w-1/2 lg:flex lg:items-center lg:p-10">
-        <h1 className="text-white font-[Satoshi] font-bold text-4xl lg:text-5xl">
+        <h1 className="text-white humane font-extralight text-9xl">
           {data.title}
         </h1>
       </div>
 
       <div className="p-2 lg:w-1/2 lg:flex lg:flex-col lg:justify-center lg:items-end lg:p-10">
-        <h2 className="text-white font-[Satoshi] font-medium md:text-sm lg:text-[2vh] lg:w-[70%]">
+        <h2 className="text-white modernist font-medium text-2xl lg:w-[70%]">
           {data.description}
         </h2>
 
