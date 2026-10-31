@@ -1,11 +1,18 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import LiquidText from "../miniComponent/LiquidText";
 import ProcessList from "../miniComponent/ProcessList";
 import SwipeCards from "../miniComponent/SwipeCards";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { usePageTransition } from "./Pagetransition";
 
 function Works() {
+  const { markPageReady } = usePageTransition();
+  
+  useEffect(() => {
+    markPageReady();
+  }, [markPageReady]);
+
   const verticalLineStyle = useRef();
   const {contextSafe} = useGSAP();
 

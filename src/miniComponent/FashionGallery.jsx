@@ -182,11 +182,8 @@ const GridItem = memo(function GridItem({ index, src, size, register, onOpen }) 
   );
 });
 
-/* -------------------------------------------------------------------------- */
-/*  Main component                                                            */
-/* -------------------------------------------------------------------------- */
 
-export default function FashionGallery({ images = DEFAULT_IMAGES, slides = DEFAULT_SLIDES }) {
+export default function FashionGallery({ images = DEFAULT_IMAGES, slides = DEFAULT_SLIDES,onReady, }) {
   // DOM refs
   const rootRef = useRef(null);
   const viewportRef = useRef(null);
@@ -529,7 +526,9 @@ export default function FashionGallery({ images = DEFAULT_IMAGES, slides = DEFAU
           gsap.set(itemEls, { zIndex: 1 });
           s.introDone = true;
           relayout();
+          onReady?.();
         },
+
       });
     };
 

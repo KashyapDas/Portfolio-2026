@@ -1,6 +1,15 @@
+import { useEffect } from "react";
 import ActionButtons from "../miniComponent/ActionButtons";
+import { usePageTransition } from "./Pagetransition";
 
 function Contact() {
+
+  const { markPageReady } = usePageTransition();
+  
+    useEffect(() => {
+      markPageReady();
+    }, [markPageReady]);
+
   return (
     <div className='w-full h-fit overflow-hidden bg-[#09090B] select-none'>
 

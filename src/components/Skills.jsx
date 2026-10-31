@@ -1,11 +1,17 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import "../index.css"
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import ScrollPathText from "../miniComponent/ScrollPathText";
 import CardMarquee from "../miniComponent/CardMarquee";
+import { usePageTransition } from './Pagetransition';
 
 function Skills() {
+  const { markPageReady } = usePageTransition();
+  
+    useEffect(() => {
+      markPageReady();
+    }, [markPageReady]);
 
   const cardsStack = [
     {

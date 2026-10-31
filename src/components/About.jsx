@@ -1,7 +1,16 @@
 import CylinderScroll from "../miniComponent/CylinderScroll";
 import AboutIntroduction from "../miniComponent/AboutIntroduction";
 import Showcase from "../miniComponent/Showcase";
+import { usePageTransition } from "./Pagetransition";
+import { useEffect } from "react";
 function About() {
+
+  const { markPageReady } = usePageTransition();
+
+  useEffect(() => {
+    markPageReady();
+  }, [markPageReady]);
+  
   return (
     <div className="w-full h-fit bg-[#0A0A0C] select-none">
       {/* Introduction of mine */}

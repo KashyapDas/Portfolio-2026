@@ -1,3 +1,4 @@
+
 import {
   createContext,
   useCallback,
@@ -6,6 +7,7 @@ import {
   useLayoutEffect,
   useRef,
 } from "react";
+
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import gsap from "gsap";
 
@@ -14,21 +16,50 @@ const TransitionContext = createContext(null);
 const DURATION = 0.7;
 const EASE = "power4.inOut";
 
+function waitForImages(container) {
+  if (!container) return Promise.resolve();
+
+  const images = [...container.querySelectorAll("img")];
+
+  return Promise.all(
+    images.map((img) => {
+      if (img.complete) return Promise.resolve();
+
+      return new Promise((resolve) => {
+        img.addEventListener("load", resolve, { once: true });
+        img.addEventListener("error", resolve, { once: true });
+      });
+    })
+  );
+}
+
 export function PageTransitionProvider({ children }) {
   const overlayRef = useRef(null);
-  const busy = useRef(false); // true while a transition is running
-  const awaitingExit = useRef(false); // true after the route was changed, before the exit animation
+  const pageRef = useRef(null);
+
+  const busy = useRef(false);
+  const awaitingExit = useRef(false);
+
+  const pageReady = useRef(false);
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  // Start with the overlay collapsed on the left
-  useLayoutEffect(() => {
-    const overlay = overlayRef.current;
-    gsap.set(overlay, { scaleX: 0, transformOrigin: "left center" });
-    return () => gsap.killTweensOf(overlay);
+  const markPageReady = useCallback(() => {
+    pageReady.current = true;
   }, []);
 
-  // Step 1: cover the screen (left -> right), then change the route
+  useLayoutEffect(() => {
+    gsap.set(overlayRef.current, {
+      scaleX: 0,
+      transformOrigin: "left center",
+    });
+
+    return () => {
+      gsap.killTweensOf(overlayRef.current);
+    };
+  }, []);
+
+  // Cover screen and navigate
   const go = useCallback(
     (to) => {
       if (busy.current || to === pathname) return;
@@ -36,72 +67,127 @@ export function PageTransitionProvider({ children }) {
       const reduceMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)"
       ).matches;
+
       if (reduceMotion) {
         navigate(to);
         return;
       }
 
       const overlay = overlayRef.current;
-      busy.current = true;
-      overlay.style.pointerEvents = "auto"; // block clicks during the transition
 
-      gsap
-        .timeline({
-          onComplete: () => {
-            awaitingExit.current = true;
-            window.scrollTo(0, 0);
-            navigate(to);
-          },
-        })
+      busy.current = true;
+      pageReady.current = false;
+
+      overlay.style.pointerEvents = "auto";
+
+      gsap.timeline({
+        onComplete: () => {
+          awaitingExit.current = true;
+          window.scrollTo(0, 0);
+          navigate(to);
+        },
+      })
         .set(overlay, { transformOrigin: "left center" })
-        .to(overlay, { scaleX: 1, duration: DURATION, ease: EASE });
+        .to(overlay, {
+          scaleX: 1,
+          duration: DURATION,
+          ease: EASE,
+        });
     },
     [navigate, pathname]
   );
 
-  // Step 2: the new page is mounted, reveal it (right -> left)
+  // Wait for page resources AND page entrance animations
   useEffect(() => {
     if (!awaitingExit.current) return;
+
     awaitingExit.current = false;
 
     const overlay = overlayRef.current;
-    gsap
-      .timeline({
-        delay: 0.1, // let the new page paint underneath the overlay
+    const page = pageRef.current;
+
+    let cancelled = false;
+
+    async function revealPage() {
+      // Wait for images
+      await waitForImages(page);
+
+      // Wait until page explicitly reports animation completion
+      while (!pageReady.current && !cancelled) {
+        await new Promise((resolve) => {
+          setTimeout(resolve, 50);
+        });
+      }
+
+      if (cancelled) return;
+
+      // Allow browser to paint
+      await new Promise((resolve) => {
+        requestAnimationFrame(() => {
+          requestAnimationFrame(resolve);
+        });
+      });
+
+      if (cancelled) return;
+
+      gsap.timeline({
         onComplete: () => {
           busy.current = false;
           overlay.style.pointerEvents = "none";
         },
       })
-      .set(overlay, { transformOrigin: "right center" })
-      .to(overlay, { scaleX: 0, duration: DURATION, ease: EASE });
+        .set(overlay, { transformOrigin: "right center" })
+        .to(overlay, {
+          scaleX: 0,
+          duration: DURATION,
+          ease: EASE,
+        });
+    }
+
+    revealPage();
+
+    return () => {
+      cancelled = true;
+    };
   }, [pathname]);
 
   return (
-    <TransitionContext.Provider value={{ go }}>
-      {children}
-      <div ref={overlayRef} className="transition-overlay" aria-hidden="true" />
+    <TransitionContext.Provider value={{ go, markPageReady }}>
+      <div ref={pageRef} className="page-content">
+        {children}
+      </div>
+
+      <div
+        ref={overlayRef}
+        className="transition-overlay"
+        aria-hidden="true"
+      />
     </TransitionContext.Provider>
   );
 }
 
 export function usePageTransition() {
   const ctx = useContext(TransitionContext);
+
   if (!ctx) {
-    throw new Error("usePageTransition must be used inside <PageTransitionProvider>");
+    throw new Error(
+      "usePageTransition must be used inside PageTransitionProvider"
+    );
   }
+
   return ctx;
 }
 
-// Drop-in replacement for <NavLink> / <Link>
 export function TransitionLink({ to, children, onClick, ...props }) {
   const { go } = usePageTransition();
 
   const handleClick = (e) => {
     onClick?.(e);
-    // let the browser handle new-tab / modified clicks
+
     if (e.defaultPrevented || e.button !== 0) return;
+
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
     e.preventDefault();
     go(to);
   };
