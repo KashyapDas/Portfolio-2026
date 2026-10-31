@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import KineticFooter from "../miniComponent/KineticTypography";
+import KineticFooter from "../miniComponent/KineticFooter";
 
 
 function Footer() {
@@ -15,7 +15,7 @@ function Footer() {
 );
 
   return (
-    <footer className="bg-[#09090b]">
+    <footer className="bg-[#09090b] z-10 h-fit">
       <KineticFooter
         title="THE WORLD DOESN'T NEED ANOTHER WEBSITE. IT NEED A REASON TO REMEMBER."
         images={images}

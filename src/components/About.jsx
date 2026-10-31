@@ -3,7 +3,7 @@ import AboutIntroduction from "../miniComponent/AboutIntroduction";
 import Showcase from "../miniComponent/Showcase";
 function About() {
   return (
-    <div className="w-full h-full bg-[#0A0A0C]">
+    <div className="w-full h-fit bg-[#0A0A0C]">
       {/* Introduction of mine */}
       <div className="z-20 w-full">
         <AboutIntroduction />
@@ -11,12 +11,12 @@ function About() {
 
 
       {/* Scroll effect of the about page */}
-      <div className="relative z-20 w-full">
+      <div className="relative z-20 w-full h-fit overflow-hidden">
         <CylinderScroll />
       </div>
       
       {/* Some extra of me */}
-      <div className=" z-20 ">
+      <div className=" z-20 h-fit overflow-hidden">
           <Showcase />
       </div>
 

@@ -39,7 +39,7 @@ function Navbar() {
   });
 
   return (
-    <nav className="w-full lg:px-7 lg:pt-2 h-fit flex items-center justify-between p-4 relative z-40 text-white bg-black">
+    <nav className="w-full lg:px-7 lg:pt-2 h-fit flex items-center justify-between p-4 relative z-40 text-white bg-[#09090B]">
       <button className="logo text-4xl uppercase">
         Kashyap Jyoti Das
       </button>
