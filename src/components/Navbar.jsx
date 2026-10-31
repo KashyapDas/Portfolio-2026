@@ -39,9 +39,9 @@ function Navbar() {
   });
 
   return (
-    <nav className="w-full lg:px-7 lg:pt-3 h-fit flex items-center justify-between p-4 relative z-40">
-      <button className="logo text-6xl sm:text-8xl">
-        KSD
+    <nav className="w-full lg:px-7 lg:pt-2 h-fit flex items-center justify-between p-4 relative z-40 text-white bg-black">
+      <button className="logo text-4xl uppercase">
+        Kashyap Jyoti Das
       </button>
 
       <button
@@ -50,7 +50,7 @@ function Navbar() {
         aria-label="Open menu"
         className="text-4xl cursor-pointer hover:scale-105 transition-transform duration-150 bg-transparent border-none p-2"
       >
-        <i className="ri-menu-line text-black"></i>
+        <i className="ri-menu-line text-white text-2xl"></i>
       </button>
 
       {/* Slide-out Menu: Off-screen, invisible, and scroll-locked by default */}
